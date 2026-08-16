@@ -6,6 +6,9 @@
 # Who
 wulff
 
+This block was laid out, verified and characterized in a two-hour
+human+AI session — the story is in [AIDEMO.md](AIDEMO.md).
+
 # Why
 
 A 1.2 V low-dropout regulator for the REY family. The reference is a
