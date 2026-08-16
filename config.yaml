@@ -10,10 +10,10 @@ tech_sky130A:
 
 #- Standard cells
 rey_tr_sky130a:
-  remote: git@github.com:analogicus/rey_tr_sky130A.git
+  remote: git@github.com:wulffern/rey_tr_sky130a.git
   revision: main
 
 #- Analog transistor library
 rey_atr_sky130a:
-  remote: git@github.com:analogicus/rey_atr_sky130A.git
+  remote: git@github.com:wulffern/rey_atr_sky130a.git
   revision: main
