@@ -1,0 +1,33 @@
+* Measure REY_LDO loop stability
+.control
+
+echo "MEAS_START"
+
+load {cicname}_OP.raw
+
+print v(vdd_1v2)
+print v(xdut.ref_1v2)
+print v(xdut.vgso)
+print i(vdd)
+
+load {cicname}_LSTB.raw
+
+*- at some corners lg_phase never reaches 0 inside the sweep: the
+*- gain margin is beyond what the band can show, and a failed meas
+*- marks the whole run failed in cicsim. So ask FIRST whether the
+*- crossing exists; -99 is the sentinel for "no phase crossing
+*- below 1 GHz".
+let phmin = minimum(real(lg_phase))
+if phmin <= 0
+  meas ac gm_db find lg_mag when lg_phase=0
+else
+  let gm_db = -99
+  print gm_db
+end
+
+meas ac pm_deg find lg_phase when lg_mag=0
+meas ac ug when lg_mag=0
+meas ac lf_gain find lg_mag at=10
+
+echo "MEAS_END"
+.endc

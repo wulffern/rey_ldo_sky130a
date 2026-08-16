@@ -1,0 +1,63 @@
+*REY_LDO_SKY130A/REY_LDO transient: load step and line step
+*----------------------------------------------------------------
+* Include
+*----------------------------------------------------------------
+#ifdef Lay
+.include ../../../work/lpe/REY_LDO_lpe.spi
+#else
+.include ../../../work/xsch/REY_LDO.spice
+#endif
+
+*-----------------------------------------------------------------
+* OPTIONS
+*-----------------------------------------------------------------
+.option TNOM=27 GMIN=1e-15 reltol=1e-3
+
+*-----------------------------------------------------------------
+* PARAMETERS
+*-----------------------------------------------------------------
+.param AVDD = {vdda}
+.param AVDDLO = {vdda-0.1}
+.param TRF = 100n
+
+*-----------------------------------------------------------------
+* FORCE
+*-----------------------------------------------------------------
+VSS  VSS  0 dc 0
+
+*- line: nominal, then a -100 mV dip from 15u to 20u
+VDD VDD_1V8 0 dc {AVDD}
++ PWL(0 {AVDD} 15u {AVDD} 15.1u {AVDDLO} 20u {AVDDLO} 20.1u {AVDD})
+
+*- load: the 1 Meg feedback resistor, plus a 0 -> 200 uA -> 0 step
+R1 VDD_1V2 0 1e6 m=1
+IL VDD_1V2 0 dc 0
++ PWL(0 0 5u 0 5.1u 200u 10u 200u 10.1u 0)
+
+*- the loop is closed: feedback input tied to the output
+VFB LPI VDD_1V2 dc 0
+
+*-----------------------------------------------------------------
+* DUT
+*-----------------------------------------------------------------
+.include ../xdut.spi
+
+#ifdef Debug
+.save all
+#endif
+
+.save v(vdd_1v2)
+.save v(vdd_1v8)
+.save v(xdut.ref_1v2)
+.save v(xdut.vgso)
+.save i(vdd)
+
+.control
+optran 0 0 0 10n 20u 0
+
+tran 10n 25u
+
+write {cicname}.raw
+exit
+.endc
+.end

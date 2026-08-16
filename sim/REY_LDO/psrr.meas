@@ -1,0 +1,15 @@
+* Measure REY_LDO PSRR
+.control
+
+load {cicname}.raw
+
+echo "MEAS_START"
+
+meas ac psrr_dc find psrr at=10
+meas ac psrr_1k find psrr at=1k
+meas ac psrr_100k find psrr at=100k
+meas ac psrr_1meg find psrr at=1Meg
+meas ac psrr_worst max psrr from=10 to=10Meg
+
+echo "MEAS_END"
+.endc

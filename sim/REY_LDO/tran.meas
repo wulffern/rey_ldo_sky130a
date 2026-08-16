@@ -1,0 +1,30 @@
+* Measure REY_LDO transient: load step and line step
+.control
+
+load {cicname}.raw
+
+echo "MEAS_START"
+
+*- quiescent, before anything moves (light load, nominal line)
+meas tran vout_light find v(vdd_1v2) at=4.9u
+meas tran idd_light find i(vdd) at=4.9u
+
+*- load step 0 -> 200 uA at 5u: worst droop while loaded
+meas tran vload_min min v(vdd_1v2) from=5u to=10u
+meas tran vout_heavy find v(vdd_1v2) at=9.9u
+
+*- load release 200 uA -> 0 at 10u: worst overshoot
+meas tran vload_max max v(vdd_1v2) from=10u to=15u
+
+*- line dip -100 mV from 15u to 20u
+meas tran vline_low find v(vdd_1v2) at=19.9u
+meas tran vout_end find v(vdd_1v2) at=24.9u
+
+*- regulation numbers
+let loadreg_v = vout_light - vout_heavy
+let linereg_v = vout_light - vline_low
+print loadreg_v
+print linereg_v
+
+echo "MEAS_END"
+.endc

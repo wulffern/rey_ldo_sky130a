@@ -1,0 +1,71 @@
+vout_light:
+  src: vout_light
+  name: Output voltage, no load
+  typ: 1.2
+  min: 1.1
+  max: 1.3
+  scale: 1
+  digits: 4
+  unit: V
+
+vout_heavy:
+  src: vout_heavy
+  name: Output voltage, 200 uA load
+  typ: 1.2
+  min: 1.05
+  max: 1.3
+  scale: 1
+  digits: 4
+  unit: V
+
+vload_min:
+  src: vload_min
+  name: Load step droop (absolute)
+  typ: 1.1
+  min: 0.9
+  max: 1.3
+  scale: 1
+  digits: 4
+  unit: V
+
+vload_max:
+  src: vload_max
+  name: Load release overshoot (absolute)
+  typ: 1.25
+  min: 1.1
+  max: 1.45
+  scale: 1
+  digits: 4
+  unit: V
+
+loadreg:
+  src: loadreg_v
+  name: Load regulation (0 to 200 uA)
+  typ: 20
+  min: -10
+  max: 100
+  scale: 1e3
+  digits: 3
+  unit: mV
+
+#- divider-referenced: the output follows 2/3 of the line by
+#- design, so a -100 mV line step moves the output ~ -67 mV
+linereg:
+  src: linereg_v
+  name: Line regulation (-100 mV step)
+  typ: 67
+  min: 40
+  max: 90
+  scale: 1e3
+  digits: 3
+  unit: mV
+
+idd:
+  src: idd_light
+  name: Quiescent supply current
+  typ: 20
+  min: 2
+  max: 60
+  scale: -1e6
+  digits: 3
+  unit: uA

@@ -1,0 +1,63 @@
+phaseMargin:
+  src: pm_deg
+  name: Phase Margin
+  typ: 60
+  min: 45
+  max: 120
+  scale: 1
+  digits: 3
+  unit: ""
+
+gainMargin:
+  src: gm_db
+  name: Gain Margin
+  #- -99 is the sentinel for "phase never reaches 0 below 1 GHz",
+  #- i.e. gain margin beyond what the sweep can show
+  typ: -10
+  min: -100
+  max: -8
+  scale: 1
+  digits: 3
+  unit: dB
+
+gain:
+  src: lf_gain
+  name: DC loop gain
+  typ: 40
+  min: 25
+  max: 80
+  scale: 1
+  digits: 3
+  unit: dB
+
+unityGain:
+  src: ug
+  name: Unity Gain Frequency
+  typ: 1
+  min: 0.05
+  max: 100
+  scale: 1e-6
+  digits: 3
+  unit: MHz
+
+vout:
+  src:
+    - v(vdd_1v2)
+  name: Output voltage
+  typ: 1.2
+  min: 1.1
+  max: 1.3
+  scale: 1
+  digits: 4
+  unit: V
+
+vref:
+  src:
+    - v(xdut.ref_1v2)
+  name: Reference voltage
+  typ: 1.2
+  min: 1.1
+  max: 1.3
+  scale: 1
+  digits: 4
+  unit: V

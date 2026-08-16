@@ -1,0 +1,17 @@
+options:
+  useTmpDir: False
+  sha: True
+corner:
+  Lay: ''
+  Sch: ''
+#- load corners for lstb and psrr: the loop gain moves with the
+#- output pole, so stability and rejection are checked at both ends
+#- of the load range. iload is the extra sink on VDD_1V2 beside the
+#- 1 Meg feedback resistor.
+  Li: |
+    .param iload=0
+  Lh: |
+    .param iload=200u
+ngspice:
+  library: REY_LDO_SKY130A
+  cell: REY_LDO

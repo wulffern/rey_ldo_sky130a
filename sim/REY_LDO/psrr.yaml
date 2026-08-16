@@ -1,0 +1,54 @@
+#- The reference is a resistive divider from VDD_1V8, so the loop
+#- FORCES the output to track 2/3 of the supply: the ideal PSRR of
+#- this topology is 20*log10(2/3) = -3.5 dB, not -60. The specs
+#- below check the design does not do WORSE than its own topology;
+#- real rejection needs a supply-independent reference.
+psrr_dc:
+  src: psrr_dc
+  name: PSRR at DC (10 Hz)
+  typ: -3.5
+  min: -10
+  max: -2
+  scale: 1
+  digits: 3
+  unit: dB
+
+psrr_1k:
+  src: psrr_1k
+  name: PSRR at 1 kHz
+  typ: -3.5
+  min: -10
+  max: -2
+  scale: 1
+  digits: 3
+  unit: dB
+
+psrr_100k:
+  src: psrr_100k
+  name: PSRR at 100 kHz
+  typ: -3.5
+  min: -10
+  max: -1
+  scale: 1
+  digits: 3
+  unit: dB
+
+psrr_1meg:
+  src: psrr_1meg
+  name: PSRR at 1 MHz
+  typ: -3.5
+  min: -10
+  max: -1
+  scale: 1
+  digits: 3
+  unit: dB
+
+psrr_worst:
+  src: psrr_worst
+  name: Worst PSRR (10 Hz to 10 MHz)
+  typ: -2
+  min: -10
+  max: 1
+  scale: 1
+  digits: 3
+  unit: dB

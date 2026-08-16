@@ -1,0 +1,71 @@
+description: |
+  REY_LDO: a 1.2 V low-dropout regulator. The reference is a
+  resistive divider from VDD_1V8 (no bandgap), buffered by a
+  two-stage amplifier driving a PMOS pass device; the load range
+  checked is 0 to 200 uA.
+simulations:
+   lstb:
+    name: Loop stability
+    description: |
+      Loop broken between VDD_1V2 and the feedback input LPI with a
+      Tian probe. Checked at both ends of the load range (Li: no
+      load, Lh: 200 uA).
+    data:
+      - name: Sch_typ
+        src: results/lstb_Sch_typical
+        method: typical
+      - name: Sch_etc
+        src: results/lstb_Sch_etc
+        method: minmax
+#      - name: Sch_3std
+#        src: results/lstb_Sch_mc
+#        method: 3std
+#      - name: Lay_typ
+#        src: results/lstb_Lay_typical
+#        method: typical
+#      - name: Lay_etc
+#        src: results/lstb_Lay_etc
+#        method: minmax
+   tran:
+    name: Transient
+    description: |
+      Load step 0 -> 200 uA -> 0 (100 ns edges) and a -100 mV line
+      dip, closed loop. Droop, overshoot, load and line regulation,
+      quiescent current.
+    data:
+      - name: Sch_typ
+        src: results/tran_Sch_typical
+        method: typical
+      - name: Sch_etc
+        src: results/tran_Sch_etc
+        method: minmax
+#      - name: Sch_3std
+#        src: results/tran_Sch_mc
+#        method: 3std
+#      - name: Lay_typ
+#        src: results/tran_Lay_typical
+#        method: typical
+#      - name: Lay_etc
+#        src: results/tran_Lay_etc
+#        method: minmax
+   psrr:
+    name: PSRR
+    description: |
+      1 V AC on VDD_1V8, closed loop; PSRR = db(v(VDD_1V2)) over
+      10 Hz to 100 MHz, at both load ends.
+    data:
+      - name: Sch_typ
+        src: results/psrr_Sch_typical
+        method: typical
+      - name: Sch_etc
+        src: results/psrr_Sch_etc
+        method: minmax
+#      - name: Sch_3std
+#        src: results/psrr_Sch_mc
+#        method: 3std
+#      - name: Lay_typ
+#        src: results/psrr_Lay_typical
+#        method: typical
+#      - name: Lay_etc
+#        src: results/psrr_Lay_etc
+#        method: minmax

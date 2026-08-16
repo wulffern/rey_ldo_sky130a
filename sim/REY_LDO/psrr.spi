@@ -1,0 +1,58 @@
+*REY_LDO_SKY130A/REY_LDO power supply rejection over frequency
+*----------------------------------------------------------------
+* Include
+*----------------------------------------------------------------
+#ifdef Lay
+.include ../../../work/lpe/REY_LDO_lpe.spi
+#else
+.include ../../../work/xsch/REY_LDO.spice
+#endif
+
+*-----------------------------------------------------------------
+* OPTIONS
+*-----------------------------------------------------------------
+.option TNOM=27 GMIN=1e-15 reltol=1e-3
+
+*-----------------------------------------------------------------
+* PARAMETERS
+*-----------------------------------------------------------------
+.param AVDD = {vdda}
+
+*-----------------------------------------------------------------
+* FORCE
+*-----------------------------------------------------------------
+VSS  VSS  0     dc 0
+
+*- 1 V AC on the supply; PSRR = db(v(vdd_1v2)) directly
+VDD VDD_1V8 0 dc {AVDD} ac 1
+
+R1 VDD_1V2 0 1e6 m=1
+IL VDD_1V2 0 dc {iload}
+
+*- the loop is closed: feedback input tied to the output
+VFB LPI VDD_1V2 dc 0
+
+*-----------------------------------------------------------------
+* DUT
+*-----------------------------------------------------------------
+.include ../xdut.spi
+
+#ifdef Debug
+.save all
+#endif
+
+.save v(vdd_1v2)
+.save v(vdd_1v8)
+
+.control
+optran 0 0 0 10n 20u 0
+op
+print v(vdd_1v2)
+
+ac dec 20 10 100Meg
+let psrr = db(v(vdd_1v2))
+
+write {cicname}.raw
+exit
+.endc
+.end

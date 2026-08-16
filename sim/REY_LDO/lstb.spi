@@ -1,0 +1,75 @@
+*REY_LDO_SKY130A/REY_LDO loop stability
+*----------------------------------------------------------------
+* Include
+*----------------------------------------------------------------
+#ifdef Lay
+.include ../../../work/lpe/REY_LDO_lpe.spi
+#else
+.include ../../../work/xsch/REY_LDO.spice
+#endif
+
+*-----------------------------------------------------------------
+* OPTIONS
+*-----------------------------------------------------------------
+.option TNOM=27 GMIN=1e-15 reltol=1e-3
+
+*-----------------------------------------------------------------
+* PARAMETERS
+*-----------------------------------------------------------------
+.param AVDD = {vdda}
+
+*-----------------------------------------------------------------
+* FORCE
+*-----------------------------------------------------------------
+VSS  VSS  0     dc 0
+VDD  VDD_1V8  0 dc {AVDD}
+
+*- feedback load: the divider the loop sees, plus the load corner's
+*- extra sink (Li: 0, Lh: 200 uA)
+R1 VDD_1V2 0 1e6 m=1
+IL VDD_1V2 0 dc {iload}
+C1 VSS LPI 1f m=1
+
+*-----------------------------------------------------------------
+* DUT
+*-----------------------------------------------------------------
+.include ../xdut.spi
+
+*- break the loop between the output and the feedback input
+.include ../../../../cpdk/ngspice/tian_subckt.lib
+X999 LPI VDD_1V2 loopgainprobe
+
+#ifdef Debug
+.save all
+#endif
+
+.save v(vdd_1v2)
+.save v(lpi)
+.save i(vdd)
+.save v(xdut.ref_1v2)
+.save v(xdut.vgso)
+*- the Tian probe's own vectors: tian_loop() reads them from both
+*- AC runs, and without the saves the second run has neither
+.save i(v.x999.vi)
+.save v(x999.x)
+
+.control
+optran 0 0 0 10n 20u 0
+op
+write {cicname}_OP.raw
+
+* Set voltage AC to 1
+ac dec 50 1 1G
+
+* Set Current to 1
+alter i.X999.Ii acmag=1
+alter v.X999.Vi acmag=0
+ac dec 50 1 1G
+
+let lg_mag = db(tian_loop())
+let lg_phase = 180*cph(tian_loop())/pi
+
+write {cicname}_LSTB.raw
+exit
+.endc
+.end
