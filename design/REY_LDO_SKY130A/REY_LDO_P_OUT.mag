@@ -1,0 +1,30 @@
+magic
+tech sky130A
+magscale 1 2
+timestamp 1786831200
+<< checkpaint >>
+rect 0 0 1600 1760
+<< locali >>
+rect 0 620 736 700
+rect 416 840 1312 920
+rect -96 840 96 920
+rect 1376 920 1440 1000
+use REYATR_PCH_11C1F2 xout1 ../REY_ATR_SKY130A
+transform 1 0 0 0 1 480
+box 0 480 1600 1280
+use REYATR_PCH_11CTAPBOT xstack_p_out_bot ../REY_ATR_SKY130A
+transform 1 0 0 0 1 0
+box 0 0 1600 480
+use REYATR_PCH_11CTAPTOP xstack_p_out_top ../REY_ATR_SKY130A
+transform 1 0 0 0 1 1280
+box 0 1280 1600 1760
+<< labels >>
+flabel locali s 416 840 1312 920 0 FreeSans 400 0 0 0 VDD_1V2
+port 1 nsew power bidirectional
+flabel locali s -96 840 96 920 0 FreeSans 400 0 0 0 VDD_1V8
+port 2 nsew power bidirectional
+flabel locali s 1376 920 1440 1000 0 FreeSans 400 0 0 0 VGSO
+port 3 nsew signal bidirectional
+<< properties >>
+string FIXED_BBOX 0 0 1600 1760
+<< end >>

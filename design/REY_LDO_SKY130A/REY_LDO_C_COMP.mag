@@ -1,0 +1,90 @@
+magic
+tech sky130A
+magscale 1 2
+timestamp 1786831200
+<< checkpaint >>
+rect 0 0 8000 6400
+<< metal3 >>
+rect 710 180 890 6220
+rect 2310 180 2490 6220
+rect 3910 180 4090 6220
+rect 5510 180 5690 6220
+rect 7110 180 7290 6220
+rect 180 3110 7820 3290
+rect 80 0 1520 100
+<< metal4 >>
+rect 710 180 890 6220
+rect 2310 180 2490 6220
+rect 3910 180 4090 6220
+rect 5510 180 5690 6220
+rect 7110 180 7290 6220
+rect 180 3110 7820 3290
+rect 80 4800 1520 4900
+use REYATR_CAPX1 xhcap1<0> ../REY_ATR_SKY130A
+transform 1 0 0 0 1 0
+box 0 0 1600 1600
+use REYATR_CAPX1 xhcap1<1> ../REY_ATR_SKY130A
+transform 1 0 1600 0 1 0
+box 1600 0 3200 1600
+use REYATR_CAPX1 xhcap1<2> ../REY_ATR_SKY130A
+transform 1 0 3200 0 1 0
+box 3200 0 4800 1600
+use REYATR_CAPX1 xhcap1<3> ../REY_ATR_SKY130A
+transform 1 0 4800 0 1 0
+box 4800 0 6400 1600
+use REYATR_CAPX1 xhcap1<4> ../REY_ATR_SKY130A
+transform 1 0 6400 0 1 0
+box 6400 0 8000 1600
+use REYATR_CAPX1 xhcap1<5> ../REY_ATR_SKY130A
+transform 1 0 0 0 1 1600
+box 0 1600 1600 3200
+use REYATR_CAPX1 xhcap1<6> ../REY_ATR_SKY130A
+transform 1 0 1600 0 1 1600
+box 1600 1600 3200 3200
+use REYATR_CAPX1 xhcap1<7> ../REY_ATR_SKY130A
+transform 1 0 3200 0 1 1600
+box 3200 1600 4800 3200
+use REYATR_CAPX1 xhcap1<8> ../REY_ATR_SKY130A
+transform 1 0 4800 0 1 1600
+box 4800 1600 6400 3200
+use REYATR_CAPX1 xhcap1<9> ../REY_ATR_SKY130A
+transform 1 0 6400 0 1 1600
+box 6400 1600 8000 3200
+use REYATR_CAPX1 xgcap2<0> ../REY_ATR_SKY130A
+transform 1 0 0 0 1 3200
+box 0 3200 1600 4800
+use REYATR_CAPX1 xgcap2<1> ../REY_ATR_SKY130A
+transform 1 0 1600 0 1 3200
+box 1600 3200 3200 4800
+use REYATR_CAPX1 xgcap2<2> ../REY_ATR_SKY130A
+transform 1 0 3200 0 1 3200
+box 3200 3200 4800 4800
+use REYATR_CAPX1 xgcap2<3> ../REY_ATR_SKY130A
+transform 1 0 4800 0 1 3200
+box 4800 3200 6400 4800
+use REYATR_CAPX1 xgcap2<4> ../REY_ATR_SKY130A
+transform 1 0 6400 0 1 3200
+box 6400 3200 8000 4800
+use REYATR_CAPX1 xgcap2<5> ../REY_ATR_SKY130A
+transform 1 0 0 0 1 4800
+box 0 4800 1600 6400
+use REYATR_CAPX1 xgcap2<6> ../REY_ATR_SKY130A
+transform 1 0 1600 0 1 4800
+box 1600 4800 3200 6400
+use REYATR_CAPX1 xgcap2<7> ../REY_ATR_SKY130A
+transform 1 0 3200 0 1 4800
+box 3200 4800 4800 6400
+use REYATR_CAPX1 xgcap2<8> ../REY_ATR_SKY130A
+transform 1 0 4800 0 1 4800
+box 4800 4800 6400 6400
+use REYATR_CAPX1 xgcap2<9> ../REY_ATR_SKY130A
+transform 1 0 6400 0 1 4800
+box 6400 4800 8000 6400
+<< labels >>
+flabel metal4 s 80 4800 1520 4900 0 FreeSans 400 0 0 0 VDD_1V8
+port 1 nsew power bidirectional
+flabel metal3 s 80 0 1520 100 0 FreeSans 400 0 0 0 VGSO
+port 2 nsew signal bidirectional
+<< properties >>
+string FIXED_BBOX 0 0 8000 6400
+<< end >>
