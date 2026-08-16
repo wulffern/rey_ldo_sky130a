@@ -1,0 +1,4 @@
+source ../tech/magic/.magicrc
+addpath ../design/REY_LDO_SKY130A
+addpath ../design/REY_ATR_SKY130A
+addpath ../design/REY_TR_SKY130A
