@@ -7,7 +7,8 @@
 wulff
 
 This block was laid out, verified and characterized in a two-hour
-human+AI session — the story is in [AIDEMO.md](AIDEMO.md).
+human+AI session — the story, including every prompt, is in
+[the AI Demo page](documents/aidemo.md).
 
 # Why
 

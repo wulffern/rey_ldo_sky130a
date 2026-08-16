@@ -1,3 +1,8 @@
+---
+layout: page
+title: AI Demo
+---
+
 # AI Demo: REY_LDO in an afternoon
 
 This block — layout, verification, testbenches, CI and documentation
@@ -92,6 +97,56 @@ decisive floorplan calls mid-flight, asked for the right checks
 (load step *and* line step *and* PSRR), and decided what ships. The
 agent proposed, built, measured, and reported — including the parts
 that reflect badly on the circuit.
+
+## The prompts, verbatim
+
+Every instruction the designer typed during the session, in order.
+Several arrived mid-flight, while the agent was working — steering,
+not restarting. Everything else on this page grew from these lines.
+
+> Let's make the layout of rey_ldo_sky130, make sure to read layout
+> instructions in cicpy.
+
+> use sch2mag in cicpy
+
+> For the resistors, consider flipping the placement, that could
+> make the routing for the series resistors easier
+
+> I was talking about the resistor order inside the stack
+
+> Maybe place the xres1 and xres2 on the far right, so that we can
+> reduce the area waste? It also looks like the resistors short to
+> VDD over a large area
+
+> Or maybe mirror r_div in Y so that VDD_1V8 is at top?
+
+> After you're done, commit and push to
+> git@github.com:wulffern/rey_ldo_sky130a.git
+
+> based on lelo_temp_sky130a/sim/LELOTEMP_BIAS_IBP/lstb.spi make a
+> testbench to run loop stability across corners for rey_ldo. Also
+> add load step up to 200 uA in a transient testbench, and check
+> load step and line step, and maybe PSRR over frequency. Have a
+> look at lelo_ex_sky130a on how to run simulations, and how to
+> document your work.
+
+> Check the CI, something is wrong
+
+> Describe the REY_LDO in the markdown sidecar
+
+> Maybe add a "AI Demo" page that summarizes our conversation over
+> the last two hours. The key steps etc, what the main challenges
+> for you were. Make sure to not leak any vital information
+
+> I think if you put the AIDEMO.md in documents or something, then
+> it will also be included in the docs jekyll build. Also, maybe
+> show all the prompts I gave you (except the remote control parts)
+
+Worth noticing: the prompts total about 250 words. The resistor
+exchange — four short messages — is a genuine design conversation:
+the agent misread the first one, the designer corrected it, then
+topped the agent's fix with a better one (the Y-mirror), which is
+what shipped.
 
 ## Honest status
 
